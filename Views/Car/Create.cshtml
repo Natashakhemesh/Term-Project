@@ -1,0 +1,65 @@
+﻿@model Wheels_Away.Models.Car
+
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 400px; 
+        margin: 0; 
+    }
+
+    div {
+        margin-bottom: 10px;
+        width: 100%; 
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    label {
+        margin-right: 10px;
+        flex: 1;
+    }
+
+    input, select, button {
+        flex: 2; 
+    }
+</style>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div>
+        <label asp-for="Model">Model:</label>
+        <input asp-for="Model" />
+    </div>
+    <div>
+        <label asp-for="Year">Year:</label>
+        <input asp-for="Year" type="number" />
+    </div>
+    <div>
+        <label asp-for="Seats">Seat Number:</label>
+        <input asp-for="Seats" type="number" />
+    </div>
+    <div>
+        <label asp-for="RentalPrice">Rental Price:</label>
+        <input asp-for="RentalPrice" type="number" step="0.01" />
+    </div>
+    <div>
+        <label asp-for="FuelType" class="control-label">Fuel Type:</label>
+        <select asp-for="FuelType" asp-items="new SelectList(ViewBag.FuelTypes)" class="form-control" required>
+            <option disabled selected value="">Choose Fuel Type </option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="GearType" class="control-label">Gear Type:</label>
+        <select asp-for="GearType" asp-items="new SelectList(ViewBag.GearTypes)" class="form-control" required>
+            <option disabled selected value="">Choose Gear Type </option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="Image">Image:</label>
+        <input asp-for="Image" type="file" />
+    </div>
+    <button type="submit">Create Car</button>
+</form>

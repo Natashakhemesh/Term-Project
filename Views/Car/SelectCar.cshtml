@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Wheels_Away.Models.Car>
+@{
+    ViewData["Title"] = "Index";
+}
+<div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>Cars</h1>
+</div>
+<hr />
+
+<div class="row">
+    @foreach (var car in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 d-flex flex-column" style="width: 20rem;">
+                <img src="@Url.Content("/images/"+car.Image)" class="card-img-top" alt="@car.Model">
+                <div class="card-body">
+                    <h5 class="card-title">@car.Model</h5>
+                    <p class="card-text"><b>Year:</b> @car.Year</p>
+                    <p class="card-text"><b>Seats:</b> @car.Seats</p>
+                    <p class="card-text"><b>Fuel Type:</b> @car.FuelType</p>
+                    <p class="card-text"><b>Gear:</b> @car.GearType</p>
+                </div>
+                <div class="card-footer mt-auto">
+                    <p class="card-text"><b>Rental Price:</b> @car.RentalPrice</p>
+                    <form method="post" asp-controller="Car" asp-action="SelectCar">
+                        <input type="hidden" name="selectedCarId" value="@car.Id" />
+                        <button type="submit" class="btn btn-primary">Select this Car</button>
+                    </form>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Car" asp-action="Edit" asp-route-carId="@car.Id" class="btn btn-warning">Edit</a>
+
+                        <form method="post" asp-controller="Car" asp-action="Delete">
+                            <input type="hidden" name="carId" value="@car.Id" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="form-group" style="text-align: right;">
+        <a asp-controller="Car" asp-action="Create" class="btn btn-primary">Create Car</a>
+    </div>
+}

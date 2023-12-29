@@ -1,0 +1,57 @@
+﻿@model List<Booking>
+
+@{
+	ViewData["Title"] = "Booking History";
+}
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card  custom-card" style="background: rgba(255, 255, 235, 0.2);
+                border-radius: 16px;
+                box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(5px);
+                -webkit-backdrop-filter: blur(5px);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+				width:100%;">
+				
+				<h2 class="m-5 p-5">Booking History</h2>
+			
+
+			<table class="table ">
+				<thead>
+					<tr>
+						<th>Booking ID</th>
+						<th>Pickup Location</th>
+						<th>Pickup Date/Time</th>
+						<th>Drop Location</th>
+						<th>Drop Date/Time</th>
+						<th>User Email</th>
+						<th>Car Model</th>
+						<th>Rental Price</th>
+						<th>Edit/Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var booking in Model)
+					{
+						<tr>
+							<td class="align-middle">@booking.Id</td>
+							<td class="align-middle">@booking.PickupLocation</td>
+							<td class="align-middle">@booking.PickupDate.ToString("yyyy-MM-dd") :@booking.PickupTime.ToString("hh:mm tt")
+							<td class="align-middle">@booking.DropLocation</td>
+							<td class="align-middle">@booking.DropDate.ToString("yyyy-MM-dd") @booking.DropTime.ToString("hh:mm tt")
+							<td class="align-middle">@booking.User.Email</td>
+							<td class="align-middle">@booking.Car.Model</td>
+							<td class="align-middle">@booking.Car.RentalPrice</td>
+							<td class="align-middle">
+								<a asp-controller="Booking" asp-action="Edit" asp-route-id="@booking.Id" class="btn btn-warning btn-sm">Edit</a>
+								<a asp-controller="Booking" asp-action="Index" asp-route-id="@booking.Id" class="btn btn-danger btn-sm">Delete</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+</div>

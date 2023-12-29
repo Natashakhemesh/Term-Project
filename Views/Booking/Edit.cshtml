@@ -1,0 +1,50 @@
+﻿@model Wheels_Away.Models.ViewModels.BookingVM
+
+@{
+    ViewData["Title"] = "Edit Booking";
+}
+
+<h2>Edit Booking</h2>
+
+<form asp-action="Edit" asp-controller="Booking" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="PickupLocation">Pickup Location:</label>
+        <input asp-for="PickupLocation" class="form-control" />
+        <span asp-validation-for="PickupLocation" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PickupDate">Pickup Date:</label>
+        <input asp-for="PickupDate" class="form-control" />
+        <span asp-validation-for="PickupDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PickupTime">Pickup Time:</label>
+        <input asp-for="PickupTime" class="form-control" />
+        <span asp-validation-for="PickupTime" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DropLocation">Drop Location:</label>
+        <input asp-for="DropLocation" class="form-control" />
+        <span asp-validation-for="DropLocation" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DropDate">Drop Date:</label>
+        <input asp-for="DropDate" class="form-control" />
+        <span asp-validation-for="DropDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DropTime">Drop Time:</label>
+        <input asp-for="DropTime" class="form-control" />
+        <span asp-validation-for="DropTime" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

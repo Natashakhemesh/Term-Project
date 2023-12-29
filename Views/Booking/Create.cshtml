@@ -1,0 +1,72 @@
+﻿@model Wheels_Away.Models.Booking
+
+@{
+	ViewData["Title"] = "Booking";
+}
+
+<div class="text-center">
+	<img src="@Url.Content("/images/WHEELS AWAY.png")" alt="Wheels Away Image" class="img-fluid" style="width: 60%; height: 400px;">
+</div>
+<br />
+
+<form asp-action="Create">
+	<div class="container">
+		<h2 style="font-weight: bold; color: #244280; font-family: 'Times New Roman'">Booking Details</h2>
+		<div class="row">
+			<div class="col-md-2">
+				<div class="form-group">
+					<label asp-for="PickupLocation" class="control-label">Pick-up Location:</label>
+					<input asp-for="PickupLocation" class="form-control" required />
+					<span asp-validation-for="PickupLocation" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label asp-for="PickupDate" class="control-label">Pick-up Date:</label>
+					<input asp-for="PickupDate" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" required />
+					<span asp-validation-for="PickupDate" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label asp-for="PickupTime" class="control-label">Pick-up Time:</label>
+					<input asp-for="PickupTime" class="form-control" required />
+					<span asp-validation-for="PickupTime" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label asp-for="DropLocation" class="control-label">Drop-off Location:</label>
+					<input asp-for="DropLocation" class="form-control" required />
+					<span asp-validation-for="DropLocation" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label asp-for="DropDate" class="control-label">Drop-off Date:</label>
+					<input asp-for="DropDate" class="form-control" required />
+					<span asp-validation-for="DropDate" class="text-danger"></span>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<label asp-for="DropTime" class="control-label">Drop-off Time:</label>
+					<input asp-for="DropTime" class="form-control" required />
+					<span asp-validation-for="DropTime" class="text-danger"></span>
+				</div>
+			</div>
+		</div>
+		<br />
+
+		<div class="form-group" style="text-align: right;">
+			<input type="submit" value="Search &rarr;" class="btn btn-primary" />
+		</div>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	
+}

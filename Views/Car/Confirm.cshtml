@@ -1,0 +1,107 @@
+﻿@model Wheels_Away.Models.Booking
+
+@{
+	ViewData["Title"] = "View";
+}
+
+
+<div>
+	<h4>Booking Details</h4>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PickupLocation)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.PickupLocation)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PickupDate)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.PickupDate)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.PickupTime)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.PickupTime)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.DropLocation)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.DropLocation)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.DropDate)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.DropDate)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.DropTime)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.DropTime)
+		</dd>
+	</dl>
+	<div class="row">
+		<div class="col-sm-2">
+			<button onclick="Confirm()" class="btn btn-success">Confirm</button>
+		</div>
+		<div class="col-sm-2">
+			<form asp-action="CancelBooking" asp-controller="Booking">
+				<input type="hidden" asp-for="Id" />
+
+				<button type="submit" class="btn btn-danger">Cancel</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="form-modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"></h5>
+			</div>
+			<div class="modal-body">
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function Confirm() {
+		// Make an AJAX request to the DelayedContent action
+		$.ajax({
+			type: 'POST',
+			url: '/Booking/ConfirmBooking',
+			data: "",
+			success: function (data) {
+				loadDelayedContentAndRedirect()
+			},
+			error: function () {
+				console.error('Error loading delayed content.');
+			}
+		})
+	}
+	function loadDelayedContentAndRedirect() {
+		// Make an AJAX request to the DelayedContent action
+		$.ajax({
+			type: 'GET',
+			url: '/Home/ConfirmSuccess', 
+			success: function (data) {
+				$('#form-modal .modal-body').html(data);
+				$('#form-modal .modal-title').html("Success");
+				$('#form-modal').modal('show');
+				setTimeout(function () {
+					window.location.href = '/Booking/Create'; 
+				}, 3000);
+			},
+			error: function () {
+				console.error('Error loading delayed content.');
+			}
+		});
+	}
+</script>
